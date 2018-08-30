@@ -1,6 +1,6 @@
 import * as actions from '../actions';
 
-const initalState = {
+const initialState = {
 
 }
 
