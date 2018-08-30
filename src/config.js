@@ -1,0 +1,1 @@
+export const SERVER_BASE_API = process.env.APP_API_BASE_URL || "http://localhost:8080"
