@@ -1,0 +1,72 @@
+#login-body {
+	background-image: url("./guillaume-de-germain-303020-unsplash.jpg");
+	/*Photo by Guillaume de Germain on Unsplash*/
+	background-position: center;
+    position: relative;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	height: 100vh;
+}
+
+#layer {
+	background-color: #d4e4db75;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow:scroll;
+}
+
+
+/*this is for the responsive nav bar*/
+
+.landingNav{
+	text-align: right;
+    font-size: 30px;
+}
+
+
+.containerLanding {
+	max-width: 839px;
+    margin: auto;
+    text-align: center;
+    padding-top: 150px;
+}
+
+.tutorialDec {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+div.tutorialDec {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.tutorialBadge {
+    border: 2px solid;
+    border-radius: 50%;
+    box-sizing: border-box;
+    text-align: center;
+    margin: auto;
+    padding-top: 35px;
+    width: 210px;
+    height: 210px;
+    box-shadow: 0px 0px 2px 1px;
+}
+
+.tutorialBadgeIcon {
+    font-size: 100px;
+    color: black;
+}
+
+.tutorialBadgePic {
+    width: 100px;
+}
+
+/*pure.css uses flex box. This will make use the badges are spaced evenly*/
+.badgeRes {
+	justify-content: space-between;
+}
