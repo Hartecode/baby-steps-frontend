@@ -49,8 +49,9 @@ export default function LandingPage() {
 							<div className="pure-u-1 pure-u-sm-8-24 ">
 								<div className="tutorialBadge">
 									<h2>Sign Up</h2>
-								<div className="tutorialBadgeIcon">
-									<i className="fas fa-user-circle"></i></div>
+									<div className="tutorialBadgeIcon">
+										<i className="fas fa-user-circle"></i>
+									</div>
 								</div> 
 							</div>
 
