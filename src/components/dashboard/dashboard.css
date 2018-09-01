@@ -1,0 +1,23 @@
+
+#daahboardContainer {
+	display: flex;
+}
+
+/*This container has the header and main tags*/
+.mainContainer {
+	width: 100%;
+}
+
+/*The container for the main tag*/
+.bodyContainer {
+	padding: 10px 50px;
+}
+
+.BabyFirstName {
+	font-size: 40px;
+}
+
+#albumPic {
+    width: 200px;
+    cursor: pointer;
+}
