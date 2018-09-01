@@ -1,0 +1,119 @@
+/*The following css follows a mobile first approah*/
+#sideBar {
+	background-color: black;
+	color: white;
+	text-align: center;
+	height: 100vh;
+	overflow-y: scroll;
+	overflow-x: none;
+	width: 0;
+	transition: width .5s;
+}
+
+.babyList {
+	padding: 0;
+    list-style: none; 
+}
+
+.babyBadge {
+	box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 50%;
+    height: 130px;
+    width: 130px;
+    margin: auto;
+    margin-bottom: 20px;
+	transition: .5s;
+
+}
+
+.badgeInnerBabyName {
+	position: relative;
+    top: 40%;
+}
+
+.addBadge {
+	box-sizing: border-box;
+    padding: 27px;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    height: 130px;
+    width: 130px;
+    margin: auto;
+    margin-bottom: 20px;
+    border: 3px dotted blue;
+    cursor: pointer;
+	transition: all .5s linear;
+}
+
+/*The double down arrrow won't show in mobile but will only be visable in larger screens*/
+.doubleDown {
+	font-size: 70px;
+	display: none;
+	transition: .5s;
+}
+
+/* Css for large screens*/
+@media only screen and (min-width: 700px) {
+	#sideBar {
+		box-sizing: border-box;
+	    padding: 50px 10px;
+	    width: 200px;
+	}
+
+	.doubleDown {
+		display: block;
+	}
+
+	.addBadge {
+		display:  none;
+	}
+
+	/* Select all but the first .babyBadge child of .babyList,
+	 * and removes the display */
+	.babyList > .babyBadge ~ .babyBadge {
+	    display: none;
+	    cursor: pointer;
+	}
+
+
+	/*The following are hover animations*/
+	#sideBar:hover {
+		width: 250px;
+	}
+
+	#sideBar:hover .babyBadge {
+		display: block;
+		width: 180px;
+		height: 180px;
+	}
+
+	#sideBar:hover .addBadge {
+		display: block;
+		animation-name: badgeFadingIn;
+		animation-duration: .5s;
+    	animation-fill-mode: forwards;
+		
+	}
+
+	/*  Select all but the first .babyBadge child of .babyList,
+	 * and adds the display and animation.*/
+	#sideBar:hover .babyList > .babyBadge ~ .babyBadge {
+	    display: block;
+		animation-name: badgeFadingIn;
+		animation-duration: .5s;
+    	animation-fill-mode: forwards;
+	}
+
+	#sideBar:hover .doubleDown {
+		opacity: 0;
+	}
+
+	/* animation which fades in the element and increases its size */
+	@keyframes badgeFadingIn {
+	    from {opacity: 0; width: 130px; height: 130px;}
+	    to {opacity: 1; width: 180px; height: 180px;}
+	}
+
+}
