@@ -66,15 +66,14 @@
 		display: block;
 	}
 
-	.addBadge {
-		display:  none;
-	}
-
-	/* Select all but the first .babyBadge child of .babyList,
-	 * and removes the display */
-	.babyList > .babyBadge ~ .babyBadge {
-	    display: none;
+	/*target the addBadge button and Select all but the first .babyBadge child of .babyList,
+	 * and rapply animastion and removes the display */
+	.addBadge, .babyList > .babyBadge ~ .babyBadge {
 	    cursor: pointer;
+	    overflow: none;
+	    animation-name: badgeFadingOut;
+		animation-duration: .5s;
+    	animation-fill-mode: forwards;
 	}
 
 
@@ -112,8 +111,14 @@
 
 	/* animation which fades in the element and increases its size */
 	@keyframes badgeFadingIn {
-	    from {opacity: 0; width: 130px; height: 130px;}
+	    from {opacity: 0; width: 10px; height: 10px;}
 	    to {opacity: 1; width: 180px; height: 180px;}
+	}
+
+	/* animation which fades in the element and increases its size */
+	@keyframes badgeFadingOut {
+	    from {opacity: 1; width: 180px; height: 180px;}
+	    to {opacity: 0; width: 10px; height: 10px; display:  none;}
 	}
 
 }
