@@ -1,8 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import BabyIcon from '../../babyicon.png';
+import InUp from './signin-signup';
+import { DEMO_USER_NAME, DEMO_PASSWORD } from '../../config';
+import { fetchPostLogin } from '../../actions';
 import './landing.css';
 
-export default function LandingPage() {
+
+export function LandingPage(props) {
+	const signInDemo = ()=> {
+		props.dispatch(fetchPostLogin({"username": DEMO_USER_NAME,"password": DEMO_PASSWORD}));
+	}
+
 	return (
 		<div id="login-body">
 			<div id="layer">
@@ -25,21 +34,14 @@ export default function LandingPage() {
 
 				<main role="main" className="containerLanding">
 				
-					<section className="login-register pure-g" aria-live="assertive">
-						<div className="pure-u-1 pure-u-md-1-2">
-							<button className="signup button-xlarge pure-button">Sign up</button>
-						</div>
-						<div className="pure-u-1 pure-u-md-1-2">
-							<button className="login button-xlarge pure-button">Login</button>
-						</div>
-					</section>
+					<InUp />
 
 					<section className="tutorial">
 						<div className="tutorialDec">
 							<p>Babies grow up fast, but Baby Steps helps you document every first along the way!</p>
 							<p>Click the Demo button to try it out!</p>
 							<div className="logButtonBox ">
-								<button id="liveDemo" className="button-xlarge pure-button">Demo</button>
+								<button onClick={signInDemo} id="liveDemo" className="button-xlarge pure-button">Demo</button>
 							</div>
 						</div>
 
@@ -77,3 +79,7 @@ export default function LandingPage() {
 		</div>
 	);
 }
+
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(LandingPage);
