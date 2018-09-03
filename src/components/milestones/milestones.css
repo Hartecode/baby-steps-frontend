@@ -1,0 +1,54 @@
+.milestoneContainer {
+	max-width: 900px;
+	min-width: 300px;
+	margin: auto;
+	font-size: 12px
+}
+
+.milestoneTable {
+	border: 1px solid gray;
+    display: flex;
+    font-size: 12px;
+    font-weight: 900px;
+
+}
+
+.milestoneTableBlock {
+	box-sizing: border-box;
+	text-align: center;
+	padding: 2px;
+}
+
+.milestoneDate {
+	min-width: 70px;
+	width: 15%;
+}
+
+.milestoneType {
+	min-width: 70px;
+	width: 15%;
+}
+
+.milestoneDes {
+	min-width: 120px;
+	width: 60%;
+}
+
+.milestoneExpand {
+	min-width: 30px;
+	width: 10%;
+}
+
+ul.milestoneList >li:nth-child(odd) {
+	background-color: #c3c3c3;
+}
+ul.milestoneList >li:nth-child(even) {
+	background-color: #fbf5f5;
+}
+
+.milestoneList {
+	padding: 0;
+	list-style: none;
+	margin: 0;
+}
+
