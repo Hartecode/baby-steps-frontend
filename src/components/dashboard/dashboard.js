@@ -1,16 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SideBar from '../sidebar/sidebar';
+import Milestones from '../milestones/milestones';
 import './dashboard.css';
 import Album from './album.jpg';
 
-export default class DashBoard extends React.Component {
+export class DashBoard extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 
+	componentWillMount() {
+		const userId = localStorage.getItem('userId');
+		if (userId === null) {
+        window.location = '/';
+		}
+		// this.props.dispatch(fetchLoginUser(userId));
+	}
+
 	render(){
+		
 		return(
-			<div id="daahboardContainer">
+			<div id="" className="flexAlain">
 				<div className="">
 					<SideBar />
 				</div>
@@ -22,16 +33,22 @@ export default class DashBoard extends React.Component {
 						</nav>
 					</header>
 
-					<main role="main" className="bodyContainer pure-g-r">
-						<div className="pure-u-1 pure-u-md-1-2 ">
-							<h2 className="BabyFirstName">Eli</h2>
-							<p>Baby Info</p>
-						</div>
-						<div className="pure-u-1 pure-u-md-1-2">
-							<img id="albumPic" alt="album image" src={Album} />
-							<p>Milestone Album</p>
+					<main role="main" className="bodyContainer ">
+						<div className="pure-g topContainer">
+							<div className="pure-u-md-1-2 ">
+								<h2 className="BabyFirstName">
+									{this.props.babys[this.props.selectedBaby].firstName}
+								</h2>
+								<p>Baby Info</p>
+							</div>
+							<div className="pure-u-md-1-2 albumContainer">
+								<img id="albumPic" alt="baby album" src={Album} />
+							</div>
 						</div>
 						
+						<div className="pure-u-1">
+							<Milestones />
+						</div>
 
 					</main>
 				</div>
@@ -40,3 +57,11 @@ export default class DashBoard extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+    user: state.user,
+    babys: state.babys,
+    selectedBaby: state.selectedBaby
+});
+
+export default connect(mapStateToProps)(DashBoard);

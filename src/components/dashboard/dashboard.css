@@ -1,5 +1,5 @@
 
-#daahboardContainer {
+.flexAlain {
 	display: flex;
 }
 
@@ -10,14 +10,25 @@
 
 /*The container for the main tag*/
 .bodyContainer {
-	padding: 10px 50px;
+	padding: 20px 10px;
 }
+
+.topContainer {
+	max-width: 900px;
+	margin: auto;
+	margin-bottom: 50px;
+}
+
+.albumContainer{
+	text-align: right;
+} 
 
 .BabyFirstName {
 	font-size: 40px;
 }
 
 #albumPic {
-    width: 200px;
+	width: 100%;
+    max-width: 200px;
     cursor: pointer;
 }
