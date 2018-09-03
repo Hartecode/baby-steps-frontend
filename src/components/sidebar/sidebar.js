@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './sidebar.css';
 import BabyIcon from '../../babyicon.png';
-import { changeSelectedBaby } from '../../actions';
+import { changeSelectedBaby } from '../../actions/baby';
 
 export function SideBar(props) {
 	
 
 	//this generates the list of babys with the current selected baby on top
 	const babyBadgeGenerator = ()=> {
-		let babys = props.babys;
+		let babys = props.babyData;
 		const selectedBaby = props.selectedBaby;
 		if( selectedBaby !== 0) {
 		const allButSelected = babys.filter( (b, index) => index !== selectedBaby); 
@@ -52,9 +52,12 @@ export function SideBar(props) {
 	);
 }
 
-const mapStateToProps = state => ({
-    babys: state.babys,
-    selectedBaby: state.selectedBaby
-});
+const mapStateToProps = state => {
+    const { babyData,selectedBaby } = state.protectedData;
+    return {
+        babyData: state.protectedData.babyData,
+        selectedBaby: state.protectedData.selectedBaby
+    };
+};
 
 export default connect(mapStateToProps)(SideBar);

@@ -1,61 +1,87 @@
 import React from 'react';
+import { Field, reduxForm, focus } from 'redux-form';
+import { required, nonEmpty, matches, length, isTrimmed } from '../../../validators';
+import Input from '../input/input';
 
-export default function SignupForm(props) {
+import { registerUser } from '../../../actions/users';
+import { login } from '../../../actions/auth';
+const passwordLength = length({min: 10, max: 72});
+const matchesPassword = matches('password');
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        const userName = e.target.username.value;
-        const password = e.target.password.value;
-        const firstName = e.target.firstName.value;
-        const lastName = e.target.lastName.value;
-        const email = e.target.email.value;
+export function SignupForm(props) {
 
-        console.log(userName);
-        console.log(password);
-        console.log(firstName);
-        console.log(lastName);
-        console.log(email);
+    const onSubmit = (values) => {
+        const { username, password, firstName, lastName, email } = values;
+        const user = { username, password, firstName, lastName, email };
+        console.log(user);
+        return props.
+            dispatch(registerUser(user))
+            .then(() => props.dispatch(login(username, password)));
     }
+
 	return (
 		<div>
-			<form onSubmit={onSubmit} className="pure-form pure-form-aligned"  >
+			<form 
+                onSubmit={onSubmit} 
+                className="pure-form pure-form-aligned"  >
                 <fieldset>
                     <div className=""></div>
                     <legend className="login-register-title"> 
                         Sign Up
                     </legend>
-                    <label htmlFor="username">
-                        Username:
-                    </label>
-                    <br />
-                    <input className="pure-input-1-2 username-signup" type="text" name="username" pattern=".{1,}" title="1 characters minimum" autoComplete="on" required />
-                    <br />
-                    <label htmlFor="password">
-                        Password:
-                    </label>
-                    <br />
-                    <input className="pure-input-1-2 password-signup" type="text" name="password" pattern=".{10, 72}" title="3 characters minimum" autoComplete="on" required />
-                    <br />
                     <label htmlFor="firstName">
                         First Name:
                     </label>
                     <br />
-                    <input className="pure-input-1-2 firstname-signup" type="test" name="firstName" autoComplete="on" required />
+                    <Field component={Input} type="text" name="firstName" />
                     <br/>
                     <label htmlFor="lastName">
                         Last Name:
                     </label>
                     <br />
-                    <input className="pure-input-1-2 lastname-signup" type="test" name="lastName" autoComplete="on" required />
+                    <Field component={Input} type="text" name="lastName" />
                     <br />
                     <label htmlFor="email">
                         email:
                     </label>
                     <br />
-                    <input className="pure-input-1-2 email-signup" type="email" name="email" autoComplete="on" required />
+                    <Field component={Input} type="email" name="email" />
+                    <br />
+                    <label htmlFor="username">
+                        Username:
+                    </label>
+                    <br />
+                    <Field 
+                        component={Input} 
+                        type="text" 
+                        name="username" 
+                        validate={[required, nonEmpty, isTrimmed]}
+                    />
+                    <br />
+                    <label htmlFor="password">
+                        Password:
+                    </label>
+                    <br />
+                    <Field
+                        component={Input}
+                        type="password"
+                        name="password"
+                        validate={[required, passwordLength, isTrimmed]}
+                    />
+                    <br />
+                    <label htmlFor="passwordConfirm">Confirm password</label>
+                    <Field
+                        component={Input}
+                        type="password"
+                        name="passwordConfirm"
+                        validate={[required, nonEmpty, matchesPassword]}
+                    />
                     
                 </fieldset>
-                <button className="pure-button pure-input-1-2 pure-button-primary" type="submit">
+                <button 
+                    className="pure-button pure-input-1-2 pure-button-primary" 
+                    type="submit"
+                    disabled={props.pristine || props.submitting}>
                     Submit
                 </button>
             </form>
@@ -67,3 +93,9 @@ export default function SignupForm(props) {
 		</div>
 	)
 }
+
+export default reduxForm({
+    form: 'registration',
+    onSubmitFail: (errors, dispatch) =>
+        dispatch(focus('registration', Object.keys(errors)[0]))
+})(SignupForm);

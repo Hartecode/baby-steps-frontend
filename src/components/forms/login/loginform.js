@@ -1,20 +1,30 @@
 import React from 'react';
+import { Field, reduxForm, focus } from 'redux-form';
+import { required, nonEmpty } from '../../../validators';
+import Input from '../input/input';
+import { login } from '../../../actions/auth';
 
-export default function LoginForm(props) {
-	const onSubmit = (e) => {
-		e.preventDefault();
-		const userName = e.target.username.value;
-		const password = e.target.password.value;
+export function LoginForm(props) {
+	const onSubmit = (values) => {
+        return props.dispatch(login(values.username, values.password));
+    }
 
-		console.log(userName);
-		console.log(password);
-	}
+    let error;
+    if (props.error) {
+        error = (
+            <div className="form-error" aria-live="polite">
+                {props.error}
+            </div>
+        );
+    }
 
 	return (
 		<div>
-			<form onSubmit={onSubmit} className="pure-form pure-form-aligned"  >
+			<form 
+                onSubmit={props.handleSubmit(values => onSubmit(values))} 
+                className="pure-form pure-form-aligned"  >
                 <fieldset>
-                    <div className="loginError"></div>
+                    <div className="loginError">{error}</div>
                     <legend className="login-register-title"> 
                     	LOGIN
                     </legend>
@@ -22,15 +32,30 @@ export default function LoginForm(props) {
                     	Username:
                     </label>
                     <br />
-                    <input className="pure-input-1-2 username-login" type="text" name="username" autoComplete="on" required />
+                     <Field
+                        component={Input}
+                        type="text"
+                        name="username"
+                        id="username"
+                        validate={[required, nonEmpty]}
+                    />
                     <br />
                     <label htmlFor="password">
                     	Password:
                     </label>
                     <br />
-                    <input className="pure-input-1-2 password-login" type="password" name="password" autoComplete="on" required />
+                    <Field
+                        component={Input}
+                        type="password"
+                        name="password"
+                        id="password"
+                        validate={[required, nonEmpty]}
+                    />
                 </fieldset>
-                <button className="pure-button pure-input-1-2 pure-button-primary" type="submit">
+                <button 
+                    className="pure-button pure-input-1-2 pure-button-primary" 
+                    disabled={props.pristine || props.submitting} 
+                    type="submit">
                     Submit
                 </button>
             </form>
@@ -42,3 +67,8 @@ export default function LoginForm(props) {
 		</div>
 	)
 }
+
+export default reduxForm({
+    form: 'login',
+    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+})(LoginForm);

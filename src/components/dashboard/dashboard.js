@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import requiresLogin from '../require/requires-login';
 import SideBar from '../sidebar/sidebar';
 import Milestones from '../milestones/milestones';
+import { fetchProtectedBabyData } from '../../actions/baby';
 import './dashboard.css';
 import Album from './album.jpg';
 
@@ -11,15 +13,14 @@ export class DashBoard extends React.Component {
 	}
 
 	componentWillMount() {
-		const userId = localStorage.getItem('userId');
-		if (userId === null) {
-        window.location = '/';
-		}
-		// this.props.dispatch(fetchLoginUser(userId));
+		this.props.dispatch(fetchProtectedBabyData());
 	}
 
+
 	render(){
-		
+		const selectBabyObj = this.props.babyData[this.props.selectedBaby];
+		const currentBaby = () => (selectBabyObj != undefined) ? selectBabyObj.firstName : '';
+
 		return(
 			<div id="" className="flexAlain">
 				<div className="">
@@ -37,7 +38,7 @@ export class DashBoard extends React.Component {
 						<div className="pure-g topContainer">
 							<div className="pure-u-md-1-2 ">
 								<h2 className="BabyFirstName">
-									{this.props.babys[this.props.selectedBaby].firstName}
+									{currentBaby()}
 								</h2>
 								<p>Baby Info</p>
 							</div>
@@ -58,10 +59,15 @@ export class DashBoard extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-    user: state.user,
-    babys: state.babys,
-    selectedBaby: state.selectedBaby
-});
+const mapStateToProps = state => {
+    const { currentUser } = state.auth;
+    const { babyData,selectedBaby } = state.protectedData;
+    return {
+        user: state.auth.currentUser.user,
+        babyData: state.protectedData.babyData,
+        selectedBaby: state.protectedData.selectedBaby
+    };
+};
 
-export default connect(mapStateToProps)(DashBoard);
+export default requiresLogin()(connect(mapStateToProps)(DashBoard));
+

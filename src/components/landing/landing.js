@@ -1,15 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import BabyIcon from '../../babyicon.png';
 import InUp from './signin-signup';
 import { DEMO_USER_NAME, DEMO_PASSWORD } from '../../config';
-import { fetchPostLogin } from '../../actions';
+// import { fetchPostLogin } from '../../actions';
 import './landing.css';
 
 
 export function LandingPage(props) {
+	// If we are logged in (which happens automatically when registration
+    // is successful) redirect to the user's dashboard
+    if (props.loggedIn) {
+        return <Redirect to="/dashboard" />;
+    }
+
 	const signInDemo = ()=> {
-		props.dispatch(fetchPostLogin({"username": DEMO_USER_NAME,"password": DEMO_PASSWORD}));
+		// props.dispatch(fetchPostLogin({"username": DEMO_USER_NAME,"password": DEMO_PASSWORD}));
 	}
 
 	return (
@@ -80,6 +87,8 @@ export function LandingPage(props) {
 	);
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    loggedIn: state.auth.currentUser !== null
+});
 
 export default connect(mapStateToProps)(LandingPage);
