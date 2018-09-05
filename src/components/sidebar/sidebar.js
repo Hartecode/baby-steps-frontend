@@ -5,11 +5,9 @@ import BabyIcon from '../../babyicon.png';
 import { changeSelectedBaby } from '../../actions/baby';
 
 export function SideBar(props) {
-	
-
 	//this generates the list of babys with the current selected baby on top
 	const babyBadgeGenerator = ()=> {
-		let babys = props.babyData;
+		let babys = props.babyData	;
 		const selectedBaby = props.selectedBaby;
 		if( selectedBaby !== 0) {
 		const allButSelected = babys.filter( (b, index) => index !== selectedBaby); 

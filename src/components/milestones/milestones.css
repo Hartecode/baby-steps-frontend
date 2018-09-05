@@ -52,3 +52,17 @@ ul.milestoneList >li:nth-child(even) {
 	margin: 0;
 }
 
+.hideStep {
+	overflow: hidden;
+    height: 0;
+}
+
+.moreDetails {
+	height: 100%;
+	transition: all .5;
+}
+
+@keyframes expand {
+	from {height: 0}
+	to {height: 100%}
+}

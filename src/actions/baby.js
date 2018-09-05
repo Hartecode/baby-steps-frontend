@@ -1,6 +1,7 @@
  
 import { SERVER_BASE_API } from '../config';
 import { normalizeResponseErrors } from './utils';
+import { fetchProtectedMilestoneData } from './milestone';
 
 export const FETCH_PROTECTED_BABY_DATA_SUCCESS = 'FETCH_PROTECTED_BABY_DATA_SUCCESS';
 export const fetchProtectedBabyDataSuccess = babyData => ({
@@ -28,7 +29,10 @@ export const fetchProtectedBabyData = () => (dispatch, getState) => {
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then((data) => dispatch(fetchProtectedBabyDataSuccess(data)))
+    .then((data) => {
+        dispatch(fetchProtectedMilestoneData(data));
+        dispatch(fetchProtectedBabyDataSuccess(data));
+    })
     .catch(err => dispatch(fetchProtectedBabyDataError(err)));
 };
 
