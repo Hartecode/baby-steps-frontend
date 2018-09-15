@@ -4,23 +4,20 @@ import {
     CHANGE_SELECTED_BABY
 } from '../actions/baby';
 
-import {
-    FETCH_PROTECTED_MILESTONE_DATA_SUCCESS,
-    FETCH_PROTECTED_MILESTONE_DATA_ERROR
-} from '../actions/milestone';
 
 const initialState = {
-    babyData: [],
-    milestoneData: [],
+    babyData: null,
     selectedBaby: 0,
+    loading: true,
     error: null
 };
 
 export default function reducer(state = initialState, action) {
     if (action.type === FETCH_PROTECTED_BABY_DATA_SUCCESS) {
-        console.log(action.babyData);
+        const babyData = action.babyData;
+
         return Object.assign({}, state, {
-            babyData: [...action.babyData],
+            babyData: [...babyData],
             error: null
         });
     } else if (action.type === FETCH_PROTECTED_BABY_DATA_ERROR) {
@@ -36,16 +33,7 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             selectedBaby: newIndex
         });
-    } else if (action.type === FETCH_PROTECTED_MILESTONE_DATA_SUCCESS) {
-        console.log(action.milestoneData);
-        return Object.assign({}, state, {
-            milestoneData: [...action.milestoneData],
-            error: null
-        });
-    } else if (action.type === FETCH_PROTECTED_MILESTONE_DATA_ERROR) {
-        return Object.assign({}, state, {
-            error: action.error
-        });
-    }
+    } 
+
     return state;
 }
