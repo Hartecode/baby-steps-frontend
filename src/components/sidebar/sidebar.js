@@ -3,22 +3,25 @@ import { connect } from 'react-redux';
 import './sidebar.css';
 import BabyIcon from '../../babyicon.png';
 import { changeSelectedBaby } from '../../actions/baby';
+import { fetchProtectedMilestoneData } from '../../actions/milestone';
 
 export function SideBar(props) {
 	//this generates the list of babys with the current selected baby on top
 	const babyBadgeGenerator = ()=> {
 		let babys = props.babyData	;
 		const selectedBaby = props.selectedBaby;
-		if( selectedBaby !== 0) {
-		const allButSelected = babys.filter( (b, index) => index !== selectedBaby); 
-		babys = [babys[selectedBaby], ...allButSelected];
+		if ( selectedBaby !== 0) {
+			const allButSelected = babys.filter( (b, index) => index !== selectedBaby); 
+			babys = [babys[selectedBaby], ...allButSelected];
 		}
-		console.log(babys);
-		return babys.map( (b, i) => {
-			return <li id={`babyBadge-${b.id}`} key={i} onClick={changeSeclected} className="babyBadge">
-					<h2 id={`babyName-${b.id}`} className="badgeInnerBabyName">{b.firstName}</h2>
-				</li>
-		});
+	
+		if (babys) {
+			return babys.map( (b, i) => {
+				return <li id={`babyBadge-${b.id}`} key={i} onClick={changeSeclected} className="babyBadge">
+						<h2 id={`babyName-${b.id}`} className="badgeInnerBabyName">{b.firstName}</h2>
+					</li>
+			});
+		}
 	}
 
 	// click listner which obtains the id number of badges
@@ -31,6 +34,7 @@ export function SideBar(props) {
 
 		if( id !== firstBadgeID) {
 			props.dispatch(changeSelectedBaby(id));
+			props.dispatch(fetchProtectedMilestoneData(id));
 		}
 	}
 

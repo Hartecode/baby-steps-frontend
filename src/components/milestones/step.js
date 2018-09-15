@@ -18,7 +18,7 @@ export default class Step extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.expand);
+		
 		return(
 			<li className="milestoneResult">
 				<div className="flexAlain">

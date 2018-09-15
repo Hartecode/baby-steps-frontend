@@ -18,7 +18,7 @@ export class DashBoard extends React.Component {
 
 
 	render(){
-		const selectBabyObj = this.props.babyData[this.props.selectedBaby];
+		const selectBabyObj = (this.props.babyData)? this.props.babyData[this.props.selectedBaby] : '';
 		const currentBaby = () => (selectBabyObj != undefined) ? selectBabyObj.firstName : '';
 
 		return(

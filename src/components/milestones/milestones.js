@@ -13,13 +13,7 @@ export class Milestones extends React.Component {
 		}
 	}
 
-	// componemtDidMount() {
-	// 	this.dispatch(fetchProtectedMilestoneData());
-	// }
-
 	render(){
-		console.log('milestones component:');
-		console.log(this.props.milestoneData);
 		const displayMilestones = () => {
 			const data = this.props.nilestoneData;
 			return data.map
@@ -37,7 +31,12 @@ export class Milestones extends React.Component {
 		// 	}
 		// }
 
-
+		const populatingSteps = () => {
+			const currentMilestones = this.props.milestoneData;
+			return currentMilestones.map(obj => {
+				return <Step />
+			});
+		}
 
 		return (
 			<div className="milestoneContainer">
@@ -79,8 +78,12 @@ export class Milestones extends React.Component {
 
 const mapStateToProps = state => {
     const { milestoneData } = state.protectedData;
+    const { selectedBaby } = state.protectedData;
+    const { babyData } = state.protectedData;
     return {
-        milestoneData: state.protectedData.milestoneData
+        milestoneData: state.protectedData.milestoneData,
+        selectedBaby: state.protectedData.selectedBaby,
+        babyData: state.protectedData.babyData
     };
 };
 
