@@ -19,7 +19,6 @@ export const fetchProtectedBabyDataError = error => ({
 export const fetchProtectedBabyData = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     const userID = getState().auth.currentUser.id;
-    console.log(userID);
     return fetch(`${SERVER_BASE_API}/api/baby/${userID}`, {
         method: 'GET',
         headers: {
@@ -30,7 +29,7 @@ export const fetchProtectedBabyData = () => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then((data) => {
-        dispatch(fetchProtectedMilestoneData(data));
+        dispatch(fetchProtectedMilestoneData(data[0].id));
         dispatch(fetchProtectedBabyDataSuccess(data));
     })
     .catch(err => dispatch(fetchProtectedBabyDataError(err)));
