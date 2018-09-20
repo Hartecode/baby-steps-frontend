@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './sidebar.css';
-import BabyIcon from '../../babyicon.png';
+import AddBaby  from './addbaby';
 import { changeSelectedBaby } from '../../actions/baby';
 import { fetchProtectedMilestoneData } from '../../actions/milestone';
 
@@ -43,10 +43,7 @@ export function SideBar(props) {
 			<ul className="babyList">
 				{babyBadgeGenerator()}
 			</ul>
-			<div className="addBadge">
-				<h2>Add Baby</h2>
-				<img className="tutorialBadgePic" alt="baby icon" src={BabyIcon} />
-			</div>
+			<AddBaby />
 			<div className="doubleDown">
 				<i className="fas fa-angle-double-down"></i>
 			</div>
