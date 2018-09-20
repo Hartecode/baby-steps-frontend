@@ -25,7 +25,6 @@ export const fetchProtectedMilestoneData = (currentBabyID) => (dispatch, getStat
     const authToken = getState().auth.authToken;
     // const selectedBaby = getState().protectedData.selectedBaby;
     // const currentBabyID = data[selectedBaby].id || getState().protectedData.babyData[selectedBaby].id;
-    console.log(currentBabyID);
     return fetch(`${SERVER_BASE_API}/api/milestone/${currentBabyID}`, {
         method: 'GET',
         headers: {

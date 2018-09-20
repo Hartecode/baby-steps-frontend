@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import BabyIcon from '../../babyicon.png';
 import InUp from './signin-signup';
 import { DEMO_USER_NAME, DEMO_PASSWORD } from '../../config';
+import { login } from '../../actions/auth';
 // import { fetchPostLogin } from '../../actions';
 import './landing.css';
 
@@ -16,7 +17,7 @@ export function LandingPage(props) {
     }
 
 	const signInDemo = ()=> {
-		// props.dispatch(fetchPostLogin({"username": DEMO_USER_NAME,"password": DEMO_PASSWORD}));
+		return props.dispatch(login(DEMO_USER_NAME, DEMO_PASSWORD));
 	}
 
 	return (
@@ -48,7 +49,9 @@ export function LandingPage(props) {
 							<p>Babies grow up fast, but Baby Steps helps you document every first along the way!</p>
 							<p>Click the Demo button to try it out!</p>
 							<div className="logButtonBox ">
-								<button onClick={signInDemo} id="liveDemo" className="button-xlarge pure-button">Demo</button>
+								<button onClick={signInDemo} id="liveDemo" className="button-xlarge pure-button">
+									Demo
+								</button>
 							</div>
 						</div>
 

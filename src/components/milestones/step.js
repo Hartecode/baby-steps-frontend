@@ -18,35 +18,43 @@ export default class Step extends React.Component {
 	}
 
 	render() {
-		
+
 		return(
-			<li className="milestoneResult">
+			<li id={this.props.id} className="milestoneResult">
 				<div className="flexAlain">
 					<div className="milestoneTableBlock milestoneDate">
-						<p>10/08/86</p>
+						<p>
+							{this.props.date}
+						</p>
 					</div>
 					<div className="milestoneTableBlock milestoneType">
-						<p>Other</p>
+						<p>
+							{(this.props.type !== "")? this.props.type: "other"}
+						</p>
 					</div>
 					<div className="milestoneTableBlock milestoneDes">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam blandit magna massa, in tincidunt quam vulputate et. </p>
+						<p>
+							{this.props.title}
+						</p>
 					</div>
 					<div className="milestoneTableBlock milestoneExpand">
-						<button onClick={this.displayMore} className="pure-button">{(this.state.expand)? '-':'+'}</button>
+						<button onClick={this.displayMore} className="pure-button">
+							{(this.state.expand)? '-':'+'}
+						</button>
 					</div>
 				</div>
 				<div className={`hideStep ${(this.state.expand)? ' moreDetails':''}`}>
 					<div className="pure-g-r">
 						<div className="pure-u-1 pure-u-sm-3-4">
 							<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin egestas a magna non molestie. Nam et turpis massa. Proin in nisl non mi suscipit tincidunt in eu ex. Pellentesque ipsum magna, mollis a diam eu, malesuada cursus nisl. Donec eu felis sagittis diam pharetra placerat. Sed sit amet sagittis orci. Suspendisse ut placerat magna, a euismod leo. Morbi facilisis a lorem ac tristique. Nam quis neque quis velit dignissim placerat id sit amet libero. Sed mi est, tincidunt ac magna sed, condimentum lacinia lacus. Nam justo lacus, tristique sit amet ante ac, mollis ultricies dolor.
+								{this.props.dec}
 							</p>
 						</div>
 						<div className="pure-u-1 pure-u-sm-1-4 pure-g-r" >
 							<img  
 								className="pure-u-1"
-								alt="baby first" 
-								src= {`${SERVER_BASE_API}/uploads/photos/babypic-1535512740378-5b80ccdb7bf66b598af7c660-5b84ba0effbfde669d81cdc4.jpeg`}
+								alt={this.props.title} 
+								src= {`${SERVER_BASE_API}/uploads/photos/${this.props.img}`}
 								/>
 						</div>
 					</div>
