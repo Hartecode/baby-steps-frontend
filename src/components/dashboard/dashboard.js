@@ -10,25 +10,44 @@ import Album from './album.jpg';
 export class DashBoard extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			mobileDisplay: false
+		}
+		this.mobileClick = this.mobileClick.bind(this);
 	}
+
 
 	componentWillMount() {
 		this.props.dispatch(fetchProtectedBabyData());
+	}
+
+	mobileClick() {
+		console.log('click');
+		this.setState( prevState => ({
+			mobileDisplay: !prevState.mobileDisplay
+		}))
 	}
 
 
 	render(){
 		const selectBabyObj = (this.props.babyData)? this.props.babyData[this.props.selectedBaby] : '';
 		const currentBaby = () => (selectBabyObj != undefined) ? selectBabyObj.firstName : '';
-
+		console.log(this.state.mobileDisplay);
 		return(
 			<div id="" className="flexAlain">
 				<div className="">
-					<SideBar />
+					<SideBar 
+						mobileDisplay={this.state.mobileDisplay}
+						onClick={this.mobileDisplay}
+					/>
 				</div>
 				<div className="mainContainer">
 					<header role="banner" className="">	
-						<h1 className="logo ">Baby Steps</h1>
+						
+						<h1 onClick={this.mobileClick} className="logo ">
+							<i className={(this.state.mobileDisplay)? 'fas fa-bars mobileBars hide' : 'fas fa-bars mobileBars '} ></i>
+							Baby Steps
+						</h1>
 						<nav className="landingNav ">
 							<div></div>
 						</nav>

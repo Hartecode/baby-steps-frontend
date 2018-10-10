@@ -47,6 +47,10 @@
 	transition: all .5s linear;
 }
 
+#sideBar.expand {
+	width: 200px;
+}
+
 /*The double down arrrow won't show in mobile but will only be visable in larger screens*/
 .doubleDown {
 	font-size: 70px;
